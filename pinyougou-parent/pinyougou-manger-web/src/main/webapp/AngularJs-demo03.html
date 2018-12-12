@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内置服务</title>
+<script src="plugins/angularjs/angular.min.js"></script>
+    <script>
+        <!--定义模块-->
+        var app = angular.module("myApp",[]);
+    //    定义控制器
+        app.controller('myController',function ($scope) {
+            $scope.score=[
+                {name:"帅",math:100,english:90},
+                {name:"江小胖",math:88,english:88},
+                {name:"浪子锋",math:99,english:66},
+                {name:"拉里埃里森",math:66,english:66}
+            ]
+        })
+        
+    //    循环
+        app.controller("xunhuanController",function ($scope,$http) {
+            $scope.findAll = function () {
+                $http.get('data.json').success(
+                  function (response) {
+                      $scope.list = response;
+                  }  
+                );
+            }
+            
+        })
+    </script>
+
+</head>
+<body ng-app="myApp" >
+<table ng-controller="myController" >
+    <tr>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>英语</td>
+    </tr>
+    <tr  ng-repeat="list in score">
+        <td>{{list.name}}</td>
+        <td>{{list.math}}</td>
+        <td>{{list.english}}</td>
+    </tr>
+</table>
+
+<hr>
+<table ng-controller="xunhuanController" ng-init="findAll()">
+    <tr>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>英语</td>
+    </tr>
+    <tr  ng-repeat="entity in list">
+        <td>{{entity.name}}</td>
+        <td>{{entity.math}}</td>
+        <td>{{entity.english}}</td>
+    </tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angularJS入门02双向绑定</title>
+    <script src="js/angular.min.js"></script>
+    <script>
+        <!--建立模块-->
+        var app = angular.module("myApp",[]);
+        // 创建控制器 $scope 控制层与视图层之间交换数据的桥梁
+        app.controller("myController",function($scope) {
+            $scope.phoneNum = 135;
+            $scope.x = 1;
+            $scope.y = 2;
+            //循环数组
+            $scope.list=[1,2,3,4,5];
+            $scope.cycle = ['*','**','***','****','*****'];
+
+            $scope.add = function () {
+                $scope.z =parseInt( $scope.x )+parseInt($scope.y);
+            }
+        })
+    </script>
+</head>
+    <!--ng-app 指令初始化一个 AngularJS 应用程序。<br>-->
+
+    <!--ng-init 指令初始化应用程序数据。<br>-->
+
+    <!--ng-model 指令把元素值（比如输入域的值）绑定到应用程序。-->
+
+<body ng-app="myApp" ng-controller="myController" ng-init="myname='帅帅'">
+<h4>入门指令</h4>
+<ul>
+    <b>指令：ng-app -->相当于启动了angularJS程序</b><br>
+    <b>指令：ng-init --> 初始化</b>
+
+    <li>{{955+996}}</li>
+    <b>指令：ng-model 数据模型从视图获取数据绑定到数据模型对象，实现双向绑定</b>
+
+    <li>请输入你的姓名： <input ng-model="myname"> <b>&nbsp; {{myname}},你好!</b></li>
+    <li> 请输入手机号：<input ng-model="phoneNum"> {{phoneNum}}&nbsp;{{phoneNum}}</li>
+
+</ul>
+    <hr>
+    <h4>控制器</h4>
+第一个数：<input ng-model="x">
+第二个数：<input ng-model="y">
+<button ng-click="add()">运算</button>
+结果：{{z}}
+
+<hr>
+<h4>循环</h4>
+<table>
+    <tr ng-repeat="x in list">
+        <td>{{x}}</td>
+    </tr>
+    <tr ng-repeat="pai in cycle">
+        <td ng-repeat="x in list" >
+            <!--{{pai}}-->
+            {{x}}
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+
+
+</body>
+</html>
